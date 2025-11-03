@@ -253,7 +253,7 @@ def moni_alipay(url):
         print(f"请求异常: {e}")
         return None, None, None, None  # 返回4个None
 
-def simulate_auth_post(context_token, updated_cookie, trace_id, url):
+def simulate_auth_post(context_token, updated_cookie, trace_id, Referer_url):
     """
     模拟支付宝授权POST请求
     :param context_token: 从moni_alipay获取的contextToken
@@ -280,7 +280,7 @@ def simulate_auth_post(context_token, updated_cookie, trace_id, url):
         'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 26_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/23B5073a Ariver/1.1.0 AliApp(AP/10.6.80.6000) Nebula WK RVKType(1) AlipayDefined(nt:WIFI,ws:393|788|3.0) AlipayClient/10.6.80.6000 Language/zh-Hans Region/CN NebulaX/1.0.0 DTN/2.0',
         'Sec-Fetch-Mode': 'cors',
         'Cookie': updated_cookie,
-        'Referer': url,
+        'Referer': Referer_url,
         'Host': 'authweb.alipay.com',
         'x-allow-afts-limit': 'true',
         'Accept': '*/*',
@@ -454,3 +454,4 @@ if __name__ == "__main__":
         if context_token:
             response = simulate_auth_post(context_token, updated_cookie, trace_id, url)
             bind_alipay_account(response, userid, apptoken)
+
